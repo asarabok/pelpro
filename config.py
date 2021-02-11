@@ -10,9 +10,9 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    DB_NAME = "flasktest"
-    DB_USER = "flasktest"
-    DB_PASS = "flasktest"
+    DB_NAME = "pelpro"
+    DB_USER = "pelprousr"
+    DB_PASS = "pelpropass"
     SQLALCHEMY_DATABASE_URI = (
         f"postgresql://{DB_USER}:{DB_PASS}@localhost/{DB_NAME}"
     )

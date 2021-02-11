@@ -1,8 +1,10 @@
 import os
-from .settings import CUSTOM_SETTINGS
 
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+
+from .settings import CUSTOM_SETTINGS
 
 app = Flask(__name__)
 
@@ -14,6 +16,7 @@ elif app.config["ENV"] == "development":
     app.config.from_object("config.DevelopmentConfig")
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from app import urls
 from app.models import City, Measurement, Plant
