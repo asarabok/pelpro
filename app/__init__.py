@@ -16,5 +16,5 @@ elif app.config["ENV"] == "development":
 
 db = SQLAlchemy(app)
 
-from app import urls
+from app import urls, context
 from app.models import City, Measurement, Plant

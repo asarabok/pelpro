@@ -11,29 +11,37 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">PelPro</a>
+                    <a class="navbar-brand" href="{{url_for('homeview')}}">PelPro</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
+
+                        {% for city in cities %}
+
+                            {% if not selected_city %}
+                                {% set class_name = 'active' %}
+                            {% elif city.external_id==selected_city.external_id %}
+                                {% set class_name = 'active' %}
+                            {% endif %}
+
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Zagreb</a>
+                                <a class="nav-link {{class_name}}" aria-current="page" href="{{url_for('cityview', external_id=city.external_id)}}">{{city.name}}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Osijek</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Split</a>
-                            </li>
+                        {% endfor %}
                         </ul>
                     </div>
                 </div>
             </nav>
+        </header>
+
+        <div class="row mt-2">
+            {% block content %} {% endblock %}
         </div>
     </div>
 
