@@ -1,0 +1,122 @@
+[
+    {
+        "name": "Bor",
+        "external_id": "bor-pinus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Breza",
+        "external_id": "breza-betula-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Brijest",
+        "external_id": "brijest-ulmus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Čempresi",
+        "external_id": "cempresi-cupressaceae",
+        "origin": "drvece"
+    },
+    {
+        "name": "Grab",
+        "external_id": "grab-carpinus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Hrast",
+        "external_id": "hrast-quercus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Hrast crnika",
+        "external_id": "hrast-crnika-quercus-ilex",
+        "origin": "drvece"
+    },
+    {
+        "name": "Jasen",
+        "external_id": "jasen-fraxinus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Joha",
+        "external_id": "joha-alnus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Lijeska",
+        "external_id": "lijeska-corylus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Lipa",
+        "external_id": "lipa-tilia-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Maslina",
+        "external_id": "maslina-olea-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Orah",
+        "external_id": "orah-juglans-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Pitomi kesten",
+        "external_id": "pitomi-kesten-castanea-sativa",
+        "origin": "drvece"
+    },
+    {
+        "name": "Platana",
+        "external_id": "platana-platanus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Topola",
+        "external_id": "topola-populus-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Vrba",
+        "external_id": "vrba-salix-sp",
+        "origin": "drvece"
+    },
+    {
+        "name": "Ambrozija",
+        "external_id": "ambrozija-ambrosia-sp",
+        "origin": "korovi"
+    },
+    {
+        "name": "Crkvina",
+        "external_id": "crkvina-parietaria-sp",
+        "origin": "korovi"
+    },
+    {
+        "name": "Kiselica",
+        "external_id": "kiselica-rumex-sp",
+        "origin": "korovi"
+    },
+    {
+        "name": "Koprive",
+        "external_id": "koprive-urticaceae",
+        "origin": "korovi"
+    },
+    {
+        "name": "Loboda",
+        "external_id": "loboda-chenopodiaceae",
+        "origin": "korovi"
+    },
+    {
+        "name": "Pelin",
+        "external_id": "pelin-artemisia-sp",
+        "origin": "korovi"
+    },
+    {
+        "name": "Trputac",
+        "external_id": "trputac-plantago-sp",
+        "origin": "korovi"
+    }
+]

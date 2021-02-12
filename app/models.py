@@ -20,6 +20,7 @@ class City(db.Model, GenericMixin):
 
 class Plant(db.Model, GenericMixin):
     origin = db.Column(db.Enum(PlantOriginsEnum), nullable=False)
+
     measurements = db.relationship("Measurement", backref="plant", lazy=True)
 
     def __repr__(self):
