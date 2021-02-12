@@ -6,7 +6,7 @@ from flask_script import Command, Option
 from scrapy.crawler import CrawlerProcess
 
 from app import app, db
-from app.helpers import MeasurementsSpider
+from app.crawlers import MeasurementsSpider
 
 
 class LoadFixture(Command):
