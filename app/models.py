@@ -29,7 +29,9 @@ class Plant(db.Model, GenericMixin):
 
 class Measurement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    scraped_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    scraped_datetime = db.Column(
+        db.DateTime, nullable=False, default=datetime.now
+    )
     measurement_date = db.Column(
         db.Date,
         nullable=False,

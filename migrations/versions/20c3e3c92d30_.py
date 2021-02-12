@@ -1,8 +1,8 @@
-"""Initial migration.
+"""empty message
 
-Revision ID: fa0dca8199d0
+Revision ID: 20c3e3c92d30
 Revises: 
-Create Date: 2021-02-11 18:33:36.544690
+Create Date: 2021-02-12 15:44:41.970540
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fa0dca8199d0'
+revision = '20c3e3c92d30'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,19 +33,19 @@ def upgrade():
     sa.Column('origin', sa.Enum('drvece', 'korovi', name='plantoriginsenum'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('external_id'),
-    sa.UniqueConstraint('name'),
-    sa.UniqueConstraint('origin')
+    sa.UniqueConstraint('name')
     )
     op.create_table('measurement',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('scraped_date', sa.DateTime(), nullable=False),
+    sa.Column('scraped_datetime', sa.DateTime(), nullable=False),
     sa.Column('measurement_date', sa.Date(), nullable=False),
     sa.Column('city_id', sa.Integer(), nullable=False),
     sa.Column('plant_id', sa.Integer(), nullable=False),
     sa.Column('value', sa.Numeric(precision=2, scale=1), nullable=False),
     sa.ForeignKeyConstraint(['city_id'], ['city.id'], ),
     sa.ForeignKeyConstraint(['plant_id'], ['plant.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('measurement_date', 'city_id', 'plant_id', name='_measurement_uc')
     )
     # ### end Alembic commands ###
 

@@ -3,9 +3,9 @@ import scrapy
 from app import app
 
 from .utils import (
-    get_city_id_from_external_id,
     get_date_obj_from_str,
-    get_plant_id_from_external_id,
+    get_model_obj_id_from_external_id,
+    save_measurements,
 )
 
 
@@ -30,13 +30,18 @@ class MeasurementsSpider(scrapy.Spider):
         wrapper_content = response.css(
             "#block-system-main > .view-peludna > .view-content"
         )
-        city_measurement = {
-            "measurement_date": self._get_measurement_date(wrapper_header),
-            "city_id": get_city_id_from_external_id(external_city_id),
-            "measurements": self._get_city_measurements(wrapper_content),
-        }
 
-        print(city_measurement)
+        city_measurements = self._get_city_measurements(wrapper_content)
+
+        for measurement in city_measurements:
+            measurement.update({
+                'measurement_date': self._get_measurement_date(wrapper_header),
+                "city_id": get_model_obj_id_from_external_id(
+                    external_city_id, "City"
+                )
+            })
+
+        save_measurements(city_measurements)
 
     def _get_measurement_date(self, wrapper):
         measurement_date_string = wrapper.css(
@@ -54,8 +59,8 @@ class MeasurementsSpider(scrapy.Spider):
             value = self._get_measurement_value(target_column)
             city_measurements.append(
                 {
-                    "plant_id": get_plant_id_from_external_id(
-                        plant_external_id
+                    "plant_id": get_model_obj_id_from_external_id(
+                        plant_external_id, "Plant"
                     ),
                     "value": value,
                 }
