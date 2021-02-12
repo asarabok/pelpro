@@ -19,7 +19,7 @@ class City(db.Model, GenericMixin):
 
 
 class Plant(db.Model, GenericMixin):
-    origin = db.Column(db.Enum(PlantOriginsEnum), nullable=False, unique=True)
+    origin = db.Column(db.Enum(PlantOriginsEnum), nullable=False)
     measurements = db.relationship("Measurement", backref="plant", lazy=True)
 
     def __repr__(self):
@@ -37,5 +37,11 @@ class Measurement(db.Model):
     plant_id = db.Column(db.Integer, db.ForeignKey("plant.id"), nullable=False)
     value = db.Column(db.Numeric(2, 1), nullable=False)
 
+    __table_args__ = (
+        db.UniqueConstraint(
+            "measurement_date", "city_id", "plant_id", name="_measurement_uc"
+        ),
+    )
+
     def __repr__(self):
-        return f"<Measurement {self.name}>"
+        return f"<Measurement {self.id}>"
