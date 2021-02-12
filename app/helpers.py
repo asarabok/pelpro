@@ -1,19 +1,18 @@
 import scrapy
 
-class QuotesSpider(scrapy.Spider):
-    name = "quotes"
+from app import app
+
+
+class MeasurementsSpider(scrapy.Spider):
+    name = "measurements"
 
     def start_requests(self):
-        urls = [
-            'http://quotes.toscrape.com/page/1/',
-            'http://quotes.toscrape.com/page/2/',
-        ]
-        for url in urls:
+        for external_city_id in app.config.get("CITIES_EXTERNAL_IDS"):
+            url = app.config.get("MEASUREMENT_CITY_URL").format(
+                external_city_id
+            )
+            print(url)
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        page = response.url.split("/")[-2]
-        filename = f'quotes-{page}.html'
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log(f'Saved file {filename}')
+        print(response)

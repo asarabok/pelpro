@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="display-6">{{selected_city.name}}</h1>
-    <hr>
+<content class="row">
+    <h4>{{ selected_city.name }}</h4>
+</content>
+<hr>
+<div class="row">
+    <h5 class="text-center">
+        Vrijednosti peluda u posljednjih 30 dana
+    </h5>
+</div>
 {% endblock %}

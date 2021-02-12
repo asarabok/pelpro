@@ -2,8 +2,11 @@ import importlib
 import json
 from os import path
 
-from app import app, db
 from flask_script import Command, Option
+from scrapy.crawler import CrawlerProcess
+
+from app import app, db
+from app.helpers import MeasurementsSpider
 
 
 class LoadFixture(Command):
@@ -37,3 +40,10 @@ class LoadFixture(Command):
             )
         except AttributeError:
             return None
+
+
+class CrawlMeasurements(Command):
+    def run(self):
+        process = CrawlerProcess()
+        process.crawl(MeasurementsSpider)
+        process.start()
