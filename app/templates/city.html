@@ -9,7 +9,8 @@
     <h3 class="text-center mt-3">Graf vrijednosti peluda</h3>
     <div class="row justify-content-center mt-3">
         <div class="col-4">
-            <label for="days_delta" class="form-label">Broj dana</label>
+            <label for="days_delta" class="form-label">Broj posljednjih dana za prikaz
+            </label>
             <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" id="days_delta">
             </select>
         </div>
@@ -20,8 +21,9 @@
 </div>
 <script type="text/javascript">
     var CONFIG = {
-        default_days_delta: {{ config.GRAPH_DAYS_DELTA }},
-        selected_city_external_id: {{ selected_city.external_id }}
+        days_delta: {{ config.GRAPH_DAYS_DELTA }},
+        selected_city_external_id: {{ selected_city.external_id }},
+        fetch_url_base: '/api/measurements/city/'
     };
 </script>
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/chartjs/js/chart.js') }}"></script>
