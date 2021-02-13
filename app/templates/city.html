@@ -16,7 +16,7 @@
         console.log(data);
     }
 
-    fetch('/api/measurements/{{selected_city.external_id}}')
+    fetch('/api/measurements/city/{{selected_city.external_id}}')
         .then(response => response.json())
         .then(data => measurementDataLoaded(data));
 

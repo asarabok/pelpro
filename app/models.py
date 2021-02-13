@@ -43,7 +43,7 @@ class Measurement(db.Model):
         "Plant", backref=db.backref("measurements", lazy='dynamic')
     )
 
-    value = db.Column(db.Numeric(2, 1), nullable=False)
+    value = db.Column(db.Numeric(10, 1), nullable=False)
 
     __table_args__ = (
         db.UniqueConstraint(
