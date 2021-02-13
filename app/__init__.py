@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
 from .settings import CUSTOM_SETTINGS
@@ -15,6 +16,7 @@ elif app.config["ENV"] == "development":
     app.config.from_object("config.DevelopmentConfig")
 
 db = SQLAlchemy(app)
+api = Api(app)
 
-from app import urls, context
+from app import context, urls
 from app.models import City, Measurement, Plant

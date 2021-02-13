@@ -10,4 +10,17 @@
         Vrijednosti peluda u posljednjih 30 dana
     </h5>
 </div>
+<script type="text/javascript">
+(function() {
+    function measurementDataLoaded(data) {
+        console.log(data);
+    }
+
+    fetch('/api/measurements/{{selected_city.external_id}}')
+        .then(response => response.json())
+        .then(data => measurementDataLoaded(data));
+
+})();
+
+</script>
 {% endblock %}

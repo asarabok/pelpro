@@ -45,7 +45,7 @@ class MeasurementsSpider(scrapy.Spider):
 
     def _get_measurement_date(self, wrapper):
         measurement_date_string = wrapper.css(
-            (".view-content " ".views-row-1 " "span[data-orig-datum]" "::text")
+            (".view-content .views-row-1 span[data-orig-datum]::text")
         ).get()
 
         return get_date_obj_from_str(measurement_date_string)

@@ -12,32 +12,9 @@
 <body class="bg-light">
     <div class="container">
         <header class="row">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="{{url_for('homeview')}}">PelPro</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-
-                        {% for city in cities %}
-
-                            {% if not selected_city %}
-                                {% set class_name = 'active' %}
-                            {% elif city.external_id==selected_city.external_id %}
-                                {% set class_name = 'active' %}
-                            {% endif %}
-
-                            <li class="nav-item">
-                                <a class="nav-link {{class_name}}" aria-current="page" href="{{url_for('cityview', external_id=city.external_id)}}">{{city.name}}</a>
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            {% block navbar %}
+                {% include 'includes/navbar.html' %}
+            {% endblock %}
         </header>
 
         <div class="row mt-3">

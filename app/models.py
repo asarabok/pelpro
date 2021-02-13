@@ -3,7 +3,7 @@ from datetime import datetime
 
 from app import db
 
-from .model_mixins import GenericMixin
+from .models_mixins import GenericMixin
 
 
 class PlantOriginsEnum(Enum):
@@ -12,16 +12,12 @@ class PlantOriginsEnum(Enum):
 
 
 class City(db.Model, GenericMixin):
-    measurements = db.relationship("Measurement", backref="city", lazy=True)
-
     def __repr__(self):
         return f"<City {self.name}>"
 
 
 class Plant(db.Model, GenericMixin):
     origin = db.Column(db.Enum(PlantOriginsEnum), nullable=False)
-
-    measurements = db.relationship("Measurement", backref="plant", lazy=True)
 
     def __repr__(self):
         return f"<Plant {self.name}>"
@@ -36,8 +32,17 @@ class Measurement(db.Model):
         db.Date,
         nullable=False,
     )
+
     city_id = db.Column(db.Integer, db.ForeignKey("city.id"), nullable=False)
+    city = db.relationship(
+        "City", backref=db.backref("measurements", lazy='dynamic')
+    )
+
     plant_id = db.Column(db.Integer, db.ForeignKey("plant.id"), nullable=False)
+    plant = db.relationship(
+        "Plant", backref=db.backref("measurements", lazy='dynamic')
+    )
+
     value = db.Column(db.Numeric(2, 1), nullable=False)
 
     __table_args__ = (
