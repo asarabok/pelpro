@@ -1,11 +1,12 @@
 from flask import redirect, render_template, url_for
 from flask.views import View
-from flask_restful import Resource, fields, marshal, reqparse
+from flask_restful import Resource, fields, marshal
 
 from app import app
 from app.models import City, Measurement, Plant
 
 from .fields import DateField
+from .filters import DaysDeltaFilter
 
 DEFAULT_CITY_EXTERNAL_ID = app.config.get("DEFAULT_CITY_EXTERNAL_ID")
 
@@ -38,31 +39,33 @@ class CityView(View):
         return render_template("city.html", selected_city=selected_city)
 
 
-class MeasurementsApiView(Resource):
+class MeasurementsApiView(Resource, DaysDeltaFilter):
     def get(self):
-        data = Measurement.query.all()
+        data = Measurement.query.filter(self.get_filter_expression()).all()
         return marshal(data, resource_fields), 200
 
 
-class CityMeasurementsApiView(Resource):
+class CityMeasurementsApiView(Resource, DaysDeltaFilter):
     def get(self, city_external_id):
         city = City.query.filter_by(
             external_id=city_external_id
         ).first_or_404()
+        data = city.measurements.filter(self.get_filter_expression()).all()
 
-        return marshal(city.measurements.all(), resource_fields), 200
+        return marshal(data, resource_fields), 200
 
 
-class PlantMeasurementsApiView(Resource):
+class PlantMeasurementsApiView(Resource, DaysDeltaFilter):
     def get(self, plant_external_id):
         plant = Plant.query.filter_by(
             external_id=plant_external_id
         ).first_or_404()
+        data = plant.measurements.filter(self.get_filter_expression()).all()
 
-        return marshal(plant.measurements.all(), resource_fields), 200
+        return marshal(data, resource_fields), 200
 
 
-class CityPlantMeasurementsApiView(Resource):
+class CityPlantMeasurementsApiView(Resource, DaysDeltaFilter):
     def get(self, city_external_id, plant_external_id):
         city = City.query.filter_by(
             external_id=city_external_id
@@ -72,6 +75,7 @@ class CityPlantMeasurementsApiView(Resource):
             external_id=plant_external_id
         ).first_or_404()
 
-        data = city.measurements.filter_by(plant=plant).all()
+        plants_in_cities = city.measurements.filter_by(plant=plant)
+        data = plants_in_cities.filter(self.get_filter_expression()).all()
 
         return marshal(data, resource_fields), 200
