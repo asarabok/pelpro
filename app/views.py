@@ -33,8 +33,14 @@ class CityView(View):
 
 class MeasurementsApiView(Resource, DaysDeltaFilter):
     def get(self):
-        data = Measurement.query.filter(self.get_filter_expression()).all()
-        return marshal(data, measurement_serializer), 200
+        data = Measurement.query.filter(self.get_filter_expression())
+        return (
+            marshal(
+                data.order_by(Measurement.measurement_date).all(),
+                measurement_serializer,
+            ),
+            200,
+        )
 
 
 class CityMeasurementsApiView(Resource, DaysDeltaFilter):
@@ -42,9 +48,15 @@ class CityMeasurementsApiView(Resource, DaysDeltaFilter):
         city = City.query.filter_by(
             external_id=city_external_id
         ).first_or_404()
-        data = city.measurements.filter(self.get_filter_expression()).all()
+        data = city.measurements.filter(self.get_filter_expression())
 
-        return marshal(data, measurement_serializer), 200
+        return (
+            marshal(
+                data.order_by(Measurement.measurement_date).all(),
+                measurement_serializer,
+            ),
+            200,
+        )
 
 
 class PlantMeasurementsApiView(Resource, DaysDeltaFilter):
@@ -52,9 +64,15 @@ class PlantMeasurementsApiView(Resource, DaysDeltaFilter):
         plant = Plant.query.filter_by(
             external_id=plant_external_id
         ).first_or_404()
-        data = plant.measurements.filter(self.get_filter_expression()).all()
+        data = plant.measurements.filter(self.get_filter_expression())
 
-        return marshal(data, measurement_serializer), 200
+        return (
+            marshal(
+                data.order_by(Measurement.measurement_date).all(),
+                measurement_serializer,
+            ),
+            200,
+        )
 
 
 class CityPlantMeasurementsApiView(Resource, DaysDeltaFilter):
@@ -68,6 +86,12 @@ class CityPlantMeasurementsApiView(Resource, DaysDeltaFilter):
         ).first_or_404()
 
         plants_in_cities = city.measurements.filter_by(plant=plant)
-        data = plants_in_cities.filter(self.get_filter_expression()).all()
+        data = plants_in_cities.filter(self.get_filter_expression())
 
-        return marshal(data, measurement_serializer), 200
+        return (
+            marshal(
+                data.order_by(Measurement.measurement_date).all(),
+                measurement_serializer,
+            ),
+            200,
+        )
