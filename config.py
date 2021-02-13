@@ -14,6 +14,6 @@ class DevelopmentConfig(Config):
     DB_USER = "pelprousr"
     DB_PASS = "pelpropass"
     SQLALCHEMY_DATABASE_URI = (
-        f"postgresql://{DB_USER}:{DB_PASS}@localhost/{DB_NAME}"
+        f"postgresql://{DB_USER}:{DB_PASS}@db/{DB_NAME}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = True
