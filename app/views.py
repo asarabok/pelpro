@@ -1,22 +1,14 @@
 from flask import redirect, render_template, url_for
 from flask.views import View
-from flask_restful import Resource, fields, marshal
+from flask_restful import Resource, marshal
 
 from app import app
 from app.models import City, Measurement, Plant
 
-from .fields import DateField
 from .filters import DaysDeltaFilter
+from .serializers import measurement_serializer
 
 DEFAULT_CITY_EXTERNAL_ID = app.config.get("DEFAULT_CITY_EXTERNAL_ID")
-
-resource_fields = {
-    "id": fields.Integer,
-    "measurement_date": DateField,
-    "plant": fields.String(attribute=lambda x: x.plant.name),
-    "city": fields.String(attribute=lambda x: x.city.name),
-    "value": fields.Fixed(decimals=1),
-}
 
 
 class HomeView(View):
@@ -42,7 +34,7 @@ class CityView(View):
 class MeasurementsApiView(Resource, DaysDeltaFilter):
     def get(self):
         data = Measurement.query.filter(self.get_filter_expression()).all()
-        return marshal(data, resource_fields), 200
+        return marshal(data, measurement_serializer), 200
 
 
 class CityMeasurementsApiView(Resource, DaysDeltaFilter):
@@ -52,7 +44,7 @@ class CityMeasurementsApiView(Resource, DaysDeltaFilter):
         ).first_or_404()
         data = city.measurements.filter(self.get_filter_expression()).all()
 
-        return marshal(data, resource_fields), 200
+        return marshal(data, measurement_serializer), 200
 
 
 class PlantMeasurementsApiView(Resource, DaysDeltaFilter):
@@ -62,7 +54,7 @@ class PlantMeasurementsApiView(Resource, DaysDeltaFilter):
         ).first_or_404()
         data = plant.measurements.filter(self.get_filter_expression()).all()
 
-        return marshal(data, resource_fields), 200
+        return marshal(data, measurement_serializer), 200
 
 
 class CityPlantMeasurementsApiView(Resource, DaysDeltaFilter):
@@ -78,4 +70,4 @@ class CityPlantMeasurementsApiView(Resource, DaysDeltaFilter):
         plants_in_cities = city.measurements.filter_by(plant=plant)
         data = plants_in_cities.filter(self.get_filter_expression()).all()
 
-        return marshal(data, resource_fields), 200
+        return marshal(data, measurement_serializer), 200
