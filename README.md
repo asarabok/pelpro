@@ -65,3 +65,10 @@ Prikaz mjerenja za lijesku za Zagreb za posljednjih 30 dana:
 ```
 http://localhost:5000/api/measurements/city/1/lijeska-corylus-sp?days_delta=30
 ```
+
+### Extra
+---
+Ručno pokretanje scrapera
+```
+docker exec pelpro_flask flask scrape_migrations
+```
