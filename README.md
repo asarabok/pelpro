@@ -14,11 +14,15 @@ Koraci:
     ```bash
     cd pelpro
     ```
-3. Pokrenuti Docker container
+3. Buildati Docker container
+    ```bash
+    docker-compose build
+    ```
+4. Pokrenuti Docker container
     ```bash
     docker-compose up -d
     ```
-4. Kreirati tablice u bazi i zapisati inicijalne podatke (gradove, biljke i mjerenja)
+5. Kreirati tablice u bazi i zapisati inicijalne podatke (gradove, biljke i mjerenja)
     ```
     docker exec pelpro_flask python manage.py db upgrade
     docker exec pelpro_flask python manage.py load_fixture -m City
@@ -26,7 +30,7 @@ Koraci:
     docker exec pelpro_flask python manage.py load_fixture -m Measurement
     ```
 
-5. GUI i API endpointima se može pristupiti pod
+6. GUI i API endpointima se može pristupiti pod
     ```
     http://localhost:5000
     ```
