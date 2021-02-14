@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd /code && /usr/local/bin/python manage.py scrape_measurements
+cd /code && /usr/local/bin/python -m flask scrape_measurements
