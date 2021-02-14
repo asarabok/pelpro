@@ -24,10 +24,10 @@ Koraci:
     ```
 5. Kreirati tablice u bazi i zapisati inicijalne podatke (gradove, biljke i mjerenja)
     ```
-    docker exec pelpro_flask python manage.py db upgrade
-    docker exec pelpro_flask python manage.py load_fixture -m City
-    docker exec pelpro_flask python manage.py load_fixture -m Plant
-    docker exec pelpro_flask python manage.py load_fixture -m Measurement
+    docker exec pelpro_flask flask db upgrade
+    docker exec pelpro_flask flask load_fixture -m City
+    docker exec pelpro_flask flask load_fixture -m Plant
+    docker exec pelpro_flask flask load_fixture -m Measurement
     ```
 
 6. GUI i API endpointima se može pristupiti pod
