@@ -23,11 +23,13 @@ services:
     stdin_open: true
     tty: true
     restart: always
+    expose:
+      - 5000
     ports:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
-      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_APP=run.py
     depends_on:
       - db
 

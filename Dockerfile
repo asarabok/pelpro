@@ -1,7 +1,4 @@
-FROM python:3.9
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+FROM python:3.7
 
 RUN mkdir /code
 WORKDIR /code
@@ -15,6 +12,7 @@ RUN python manage.py db upgrade
 RUN python manage.py load_fixture -m City
 RUN python manage.py load_fixture -m Plant
 RUN python manage.py load_fixture -m Measurement
+EXPOSE 5000
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
