@@ -4,7 +4,7 @@ RUN mkdir /code
 WORKDIR /code
 ADD . /code
 
-RUN apt-get update && apt-get install gcc python3-dev cron -y
+RUN apt-get update && apt-get install gcc python3-dev cron vim -y
 RUN pip install --upgrade pip
 RUN pip install -r requirements/development.txt
 
