@@ -1,1 +1,1 @@
-* * * * * sh /code/cron/scrape_measurements.sh
+* * * * * sh /code/cron/scrape_measurements.sh >> /code/zlog.txt 2>&1
