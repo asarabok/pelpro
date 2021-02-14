@@ -20,10 +20,10 @@ Koraci:
     ```
 4. Kreirati tablice u bazi i zapisati inicijalne podatke (gradove, biljke i mjerenja)
     ```
-    python manage.py db upgrade
-    python manage.py load_fixture -m City
-    python manage.py load_fixture -m Plant
-    python manage.py load_fixture -m Measurement
+    docker exec flask python manage.py db upgrade
+    docker exec flask python manage.py load_fixture -m City
+    docker exec flask python manage.py load_fixture -m Plant
+    docker exec flask python manage.py load_fixture -m Measurement
     ```
 5. Pokrenuti aplikaciju iz containera
     ```bash
